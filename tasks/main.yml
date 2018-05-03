@@ -35,7 +35,7 @@
   with_items:
     - "/etc/gridinit.d/{{ openio_account_namespace }}"
     - "{{ openio_account_sysconfig_dir }}/account-{{ openio_account_serviceid }}"
-    - "/var/lib/oio/sds/{{ openio_account_namespace }}/account-{{ openio_account_serviceid }}"
+    - "/etc/oio/sds/{{ openio_account_namespace }}/watch"
 
 - name: Ensure directories exists
   file:
@@ -62,6 +62,8 @@
         account-{{ openio_account_serviceid }}/account-{{ openio_account_serviceid }}.conf"
     - src: "gridinit_account.conf.j2"
       dest: "{{ openio_account_gridinit_dir }}/account-{{ openio_account_serviceid }}.conf"
+    - src: "watch-account.yml.j2"
+      dest: "{{ openio_account_sysconfig_dir }}/watch/account-{{ openio_account_serviceid }}.yml"
   register: _account_conf
 
 - name: restart account

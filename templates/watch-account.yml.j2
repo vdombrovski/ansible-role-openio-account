@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+---
+host: {{ openio_account_bind_address }}
+port: {{ openio_account_bind_port }}
+type: account
+{% if openio_account_location | ipaddr %}
+location: {{ openio_account_location | replace(".", "-") }}
+{% else %}
+location: {{ openio_account_location }}
+{% endif %}
+checks:
+  - {type: tcp}
+stats:
+  - {type: http, path: /status, parser: json}
+  - {type: system}
+...

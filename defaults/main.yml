@@ -15,4 +15,6 @@ openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-0"
 openio_account_log_level: INFO
 openio_account_log_facility: LOG_LOCAL0
 openio_account_log_address: /dev/log
+
+openio_account_location: "{{ ansible_hostname }}"
 ...

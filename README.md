@@ -16,6 +16,7 @@ An Ansible role for PURPOSE. Specifically, the responsibilities of this role are
 | :---       | :---    | :---             |
 | `openio_account_bind_address` | `"{{ ansible_default_ipv4.address }}"` | Address  |
 | `openio_account_bind_port` | `6009` | TCP port to use |
+| `openio_account_location` | `"{{ ansible_hostname }}"` | Minimal distance to distributed a content/meta/rdir |
 | `openio_account_log_address` | `/dev/log` | log file |
 | `openio_account_log_facility` | `LOG_LOCAL0` | Facility syslog |
 | `openio_account_log_level` | `INFO` | Log Verbosity |
