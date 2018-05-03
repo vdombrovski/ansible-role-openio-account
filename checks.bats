@@ -5,18 +5,18 @@
 
 # Tests
 
-@test 'Unlock meta0' {
-  run bash -c "docker exec -ti ${SUT_ID} openio --oio-ns TRAVIS cluster unlock meta0 172.17.0.2:6001"
-  echo "output: "$output
-  echo "status: "$status
-  [[ "${status}" -eq "0" ]]
-  [[ "${output}" =~ 'unlocked' ]]
-}
+#@test 'Unlock meta0' {
+#  run bash -c "docker exec -ti ${SUT_ID} openio --oio-ns TRAVIS cluster unlock meta0 172.17.0.2:6001"
+#  echo "output: "$output
+#  echo "status: "$status
+#  [[ "${status}" -eq "0" ]]
+#  [[ "${output}" =~ 'unlocked' ]]
+#}
 
-@test 'Check score meta0' {
-  run bash -c "docker exec -ti ${SUT_ID} openio cluster list --oio-ns TRAVIS --stats"
-  echo "output: "$output
-  echo "status: "$status
-  [[ "${status}" -eq "0" ]]
-  [[ ! "${output}" =~ '"Score": 0,' ]]
-}
+#@test 'Check score meta0' {
+#  run bash -c "docker exec -ti ${SUT_ID} openio cluster list --oio-ns TRAVIS --stats"
+#  echo "output: "$output
+#  echo "status: "$status
+#  [[ "${status}" -eq "0" ]]
+#  [[ ! "${output}" =~ '"Score": 0,' ]]
+#}
