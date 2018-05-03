@@ -5,18 +5,28 @@
 
 # Tests
 
-#@test 'Unlock meta0' {
-#  run bash -c "docker exec -ti ${SUT_ID} openio --oio-ns TRAVIS cluster unlock meta0 172.17.0.2:6001"
-#  echo "output: "$output
-#  echo "status: "$status
-#  [[ "${status}" -eq "0" ]]
-#  [[ "${output}" =~ 'unlocked' ]]
-#}
+@test 'Gridinit unit present' {
+  run bash -c "docker exec -ti ${SUT_ID} cat /etc/gridinit.d/TRAVIS/account-0.conf"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ '/usr/bin/oio-account-server /etc/oio/sds/TRAVIS/account-0/account-0.conf' ]]
+}
 
-#@test 'Check score meta0' {
-#  run bash -c "docker exec -ti ${SUT_ID} openio cluster list --oio-ns TRAVIS --stats"
-#  echo "output: "$output
-#  echo "status: "$status
-#  [[ "${status}" -eq "0" ]]
-#  [[ ! "${output}" =~ '"Score": 0,' ]]
-#}
+@test 'Conf account' {
+  run bash -c "docker exec -ti ${SUT_ID} cat /etc/oio/sds/TRAVIS/account-0/account-0.conf"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ 'sentinel_hosts = 127.0.0.1:6012,127.0.0.2:6012,127.0.0.3:6012' ]]
+  [[ "${output}" =~ 'syslog_prefix = OIO,TRAVIS,account,0' ]]
+}
+
+@test 'Watch file account' {
+  run bash -c "docker exec -ti ${SUT_ID} cat /etc/oio/sds/TRAVIS/watch/account-0.yml"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ 'port: 6009' ]]
+  [[ "${output}" =~ '  - {type: http, path: /status, parser: json}' ]]
+}
