@@ -1,9 +1,8 @@
 [![Build Status](https://travis-ci.org/open-io/ansible-role-openio-account.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-account)
 # Ansible role `account`
 
-An Ansible role for PURPOSE. Specifically, the responsibilities of this role are to:
+An Ansible role for install and configure a servicetype account. 
 
--
 
 ## Requirements
 
@@ -32,10 +31,20 @@ No dependencies.
 
 ```yaml
 - hosts: all
-  gather_facts: true
   become: true
+  vars:
+    NS: OPENIO
   roles:
+    - role: repo
+    - role: gridinit
+      openio_gridinit_namespace: "{{ NS }}"
     - role: account
+      openio_account_namespace: "{{ NS }}"
+      openio_account_bind_address: "172.17.0.2"
+      openio_account_sentinels_hosts:
+        - 172.17.0.2:6012
+        - 172.17.0.3:6012
+        - 172.17.0.4:6012
 ```
 
 
@@ -59,7 +68,3 @@ Apache License, Version 2.0
 ## Contributors
 
 - [Cedric DELGEHIER](https://github.com/cdelgehier) (maintainer)
-- [Romain ACCIARI](https://github.com/racciari) (maintainer)
-- [Vincent LEGOLL](https://github.com/vincent-legoll) (maintainer)
-- [Sebastien LAPIERRE](https://github.com/sebastienlapierre) (maintainer)
-- [Geoffrey TIEN](https://github.com/GeoffreyTien) (maintainer)
