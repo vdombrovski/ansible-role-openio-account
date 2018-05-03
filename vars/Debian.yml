@@ -1,0 +1,6 @@
+# roles/account/vars/Debian.yml
+# Distribution-specific variables for Ubuntu, Debian, ...
+---
+account_packages:
+  - openio-account
+...

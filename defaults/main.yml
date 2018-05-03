@@ -1,0 +1,5 @@
+# roles/account/defaults/main.yml
+---
+openio_account_namespace: "OPENIO"
+openio_account_serviceid: "0"
+...

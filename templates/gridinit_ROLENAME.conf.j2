@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+[Service.{{ openio_account_namespace }}-account-{{ openio_account_serviceid }}]
+command=/bin/foo
+enabled=true
+start_at_boot=true
+on_die=respawn
+group={{ openio_account_namespace }},account,{{ openio_account_serviceid }}
+uid=openio
+gid=openio
+env.PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin

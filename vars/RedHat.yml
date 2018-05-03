@@ -1,0 +1,6 @@
+# roles/account/vars/RedHat.yml
+# Distribution-specific variables for RHEL, CentOS, ...
+---
+account_packages:
+  - openio-account
+...

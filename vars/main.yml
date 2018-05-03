@@ -1,0 +1,9 @@
+---
+openio_account_sysconfig_dir: "/etc/oio/sds/{{ openio_account_namespace }}"
+openio_account_servicename: "account-{{ openio_account_serviceid }}"
+
+openio_account_definition_file: >
+  "{{ openio_account_sysconfig_dir }}/
+  {{ openio_account_servicename }}/{{ openio_account_servicename }}.conf"
+openio_account_gridinit_dir: "/etc/gridinit.d/{{ openio_account_namespace }}"
+...

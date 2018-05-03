@@ -1,0 +1,8 @@
+# roles/account/handlers/main.yml
+---
+#- name: restart account
+#  service:
+#    name: "{{ account_service }}"
+#    state: restarted
+#
+...
