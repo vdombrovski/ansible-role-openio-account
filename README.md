@@ -13,7 +13,8 @@ An Ansible role for install and configure a servicetype account.
 
 | Variable   | Default | Comments (type)  |
 | :---       | :---    | :---             |
-| `openio_account_bind_address` | `"{{ ansible_default_ipv4.address }}"` | Address  |
+| `openio_account_bind_address` | `"{{ hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address'] }}"` | Address  |
+| `openio_account_bind_interface` | `"{{ ansible_default_ipv4.alias }}"` | Network Interface  |
 | `openio_account_bind_port` | `6009` | TCP port to use |
 | `openio_account_location` | `"{{ ansible_hostname }}"` | Minimal distance to distributed a content/meta/rdir |
 | `openio_account_log_address` | `/dev/log` | log file |

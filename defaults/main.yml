@@ -3,7 +3,9 @@
 openio_account_namespace: "OPENIO"
 openio_account_serviceid: "0"
 
-openio_account_bind_address: "{{ ansible_default_ipv4.address }}"
+openio_account_bind_interface: "{{ ansible_default_ipv4.alias }}"
+openio_account_bind_address:
+  "{{ hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address'] }}"
 openio_account_bind_port: 6009
 #openio_account_backlog: 2048
 openio_account_sentinels_hosts:
@@ -11,7 +13,7 @@ openio_account_sentinels_hosts:
   - 127.0.0.2:6012
   - 127.0.0.3:6012
 
-openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-0"
+openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-1"
 openio_account_log_level: INFO
 openio_account_log_facility: LOG_LOCAL0
 openio_account_log_address: /dev/log
