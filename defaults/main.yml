@@ -10,10 +10,7 @@ openio_account_bind_address:
   "{{ hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address'] }}"
 openio_account_bind_port: 6009
 #openio_account_backlog: 2048
-openio_account_sentinels_hosts:
-  - 127.0.0.1:6012
-  - 127.0.0.2:6012
-  - 127.0.0.3:6012
+openio_account_sentinels_hosts: ""
 
 openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-1"
 openio_account_log_level: INFO

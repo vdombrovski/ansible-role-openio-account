@@ -44,10 +44,7 @@ No dependencies.
     - role: account
       openio_account_namespace: "{{ NS }}"
       openio_account_bind_address: "172.17.0.2"
-      openio_account_sentinels_hosts:
-        - 172.17.0.2:6012
-        - 172.17.0.3:6012
-        - 172.17.0.4:6012
+      openio_account_sentinels_hosts: "172.17.0.2:6012,172.17.0.3:6012,172.17.0.4:6012"
 ```
 
 

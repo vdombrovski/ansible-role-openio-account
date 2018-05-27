@@ -2,7 +2,7 @@
 [account-server]
 bind_addr = {{ openio_account_bind_address }}
 bind_port = {{ openio_account_bind_port }}
-sentinel_hosts = {{ openio_account_sentinels_hosts | join(',') }}
+sentinel_hosts = {{ openio_account_sentinels_hosts }}
 sentinel_master_name = {{ openio_account_sentinel_master_name }}
 log_level = {{ openio_account_log_level }}
 log_facility = {{ openio_account_log_facility }}
