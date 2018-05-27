@@ -21,9 +21,11 @@ An Ansible role for install and configure a servicetype account.
 | `openio_account_log_facility` | `LOG_LOCAL0` | Facility syslog |
 | `openio_account_log_level` | `INFO` | Log Verbosity |
 | `openio_account_namespace` | `"OPENIO"  | Namespace |
-| `openio_account_sentinel_master_name` | `"{{ openio_account_namespace }}-master-0"` | Sentinel master name |
+| `openio_account_sentinel_master_name` | `"{{ openio_account_namespace }}-master-1"` | Sentinel master name |
 | `openio_account_sentinels_hosts` | `` | List of sentinels <IP:PORT> |
 | `openio_account_serviceid` | `"0"` | ID in gridinit |
+| `openio_account_version` | `"*"` | Install a specific version |
+
 ## Dependencies
 
 No dependencies.

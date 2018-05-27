@@ -3,6 +3,8 @@
 openio_account_namespace: "OPENIO"
 openio_account_serviceid: "0"
 
+openio_meta_version: '*'
+
 openio_account_bind_interface: "{{ ansible_default_ipv4.alias }}"
 openio_account_bind_address:
   "{{ hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address'] }}"
