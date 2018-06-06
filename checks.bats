@@ -18,7 +18,8 @@
   echo "output: "$output
   echo "status: "$status
   [[ "${status}" -eq "0" ]]
-  [[ "${output}" =~ 'sentinel_hosts = 127.0.0.1:6012,127.0.0.2:6012,127.0.0.3:6012' ]]
+  [[ "${output}" =~ 'redis_host = 172.17.0.2' ]]
+  [[ "${output}" =~ 'redis_port = 6011' ]]
   [[ "${output}" =~ 'syslog_prefix = OIO,TRAVIS,account,0' ]]
 }
 
@@ -29,4 +30,12 @@
   [[ "${status}" -eq "0" ]]
   [[ "${output}" =~ 'port: 6009' ]]
   [[ "${output}" =~ '  - {type: http, path: /status, parser: json}' ]]
+}
+
+@test 'Account answer to a request' {
+  run bash -c "curl http://${SUT_IP}:6009/status"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ '{"account_count": 0}' ]]
 }

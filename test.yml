@@ -30,6 +30,10 @@
     - role: repo
     - role: gridinit
       openio_gridinit_namespace: "{{ NS }}"
+    - role: redis
+      openio_redis_namespace: "{{ NS }}"
+
     - role: role_under_test
       openio_account_namespace: "{{ NS }}"
+      openio_account_redis_standalone: "172.17.0.2:6011"
 ...
