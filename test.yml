@@ -4,6 +4,7 @@
   become: true
   vars:
     NS: TRAVIS
+    docker: true
   #pre_tasks:
   #  - name: Ensures namespace directory exists
   #    file:
