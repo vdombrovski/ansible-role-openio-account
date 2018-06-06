@@ -2,5 +2,5 @@
 # Distribution-specific variables for Ubuntu, Debian, ...
 ---
 account_packages:
-  - "openio-sds={{ openio_meta_version }}"
+  - "{{ 'openio-sds' if openio_account_version == 'latest' else 'openio-sds=' ~ openio_account_version }}"
 ...
