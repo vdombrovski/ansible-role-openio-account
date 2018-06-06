@@ -11,8 +11,10 @@ openio_account_bind_address:
 openio_account_bind_port: 6009
 #openio_account_backlog: 2048
 openio_account_sentinels_hosts: ""
-
 openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-1"
+
+openio_account_redis_standalone: ""
+
 openio_account_log_level: INFO
 openio_account_log_facility: LOG_LOCAL0
 openio_account_log_address: /dev/log

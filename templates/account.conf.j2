@@ -2,8 +2,14 @@
 [account-server]
 bind_addr = {{ openio_account_bind_address }}
 bind_port = {{ openio_account_bind_port }}
+{% if openio_account_redis_standalone %}
+{% set redis = openio_account_redis_standalone.split(':') %}
+redis_host = {{ redis[0] }}
+redis_port = {{ redis[1] }}
+{% else %}
 sentinel_hosts = {{ openio_account_sentinels_hosts }}
 sentinel_master_name = {{ openio_account_sentinel_master_name }}
+{% endif %}
 log_level = {{ openio_account_log_level }}
 log_facility = {{ openio_account_log_facility }}
 log_address = {{ openio_account_log_address }}
