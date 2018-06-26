@@ -26,6 +26,7 @@ An Ansible role for install and configure a servicetype account.
 | `openio_account_sentinels_hosts` | `` | List of sentinels <IP:PORT> |
 | `openio_account_serviceid` | `"0"` | ID in gridinit |
 | `openio_account_version` | `latest` | Install a specific version |
+| `openio_account_workers` | `` | Number of worker (default if empty) |
 
 ## Dependencies
 

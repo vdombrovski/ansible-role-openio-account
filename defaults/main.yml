@@ -20,4 +20,5 @@ openio_account_log_facility: LOG_LOCAL0
 openio_account_log_address: /dev/log
 
 openio_account_location: "{{ ansible_hostname }}"
+openio_account_workers: ""
 ...
