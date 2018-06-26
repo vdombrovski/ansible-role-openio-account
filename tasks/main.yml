@@ -61,7 +61,7 @@
       dest: "{{ openio_account_sysconfig_dir }}/\
         account-{{ openio_account_serviceid }}/account-{{ openio_account_serviceid }}.conf"
     - src: "gridinit_account.conf.j2"
-      dest: "{{ openio_account_gridinit_dir }}/{{ openio_ecd_gridinit_file_prefix }}\
+      dest: "{{ openio_account_gridinit_dir }}/{{ openio_account_gridinit_file_prefix }}\
         account-{{ openio_account_serviceid }}.conf"
     - src: "watch-account.yml.j2"
       dest: "{{ openio_account_sysconfig_dir }}/watch/account-{{ openio_account_serviceid }}.yml"
