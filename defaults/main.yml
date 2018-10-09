@@ -24,4 +24,6 @@ openio_account_workers: ""
 
 openio_account_gridinit_dir: "/etc/gridinit.d/{{ openio_account_namespace }}"
 openio_account_gridinit_file_prefix: ""
+
+openio_account_provision_only: false
 ...
