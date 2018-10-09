@@ -71,6 +71,8 @@
   shell: |
     gridinit_cmd reload
     gridinit_cmd restart  {{openio_account_namespace}}-account-{{openio_account_serviceid}}
-  when: _account_conf.changed
+  when:
+    - _account_conf.changed
+    - not openio_account_provision_only
   tags: configure
 ...

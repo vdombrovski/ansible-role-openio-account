@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/open-io/ansible-role-openio-account.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-account)
 # Ansible role `account`
 
-An Ansible role for install and configure a servicetype account. 
+An Ansible role for install and configure a servicetype account.
 
 
 ## Requirements
@@ -29,6 +29,7 @@ An Ansible role for install and configure a servicetype account.
 | `openio_account_serviceid` | `"0"` | ID in gridinit |
 | `openio_account_version` | `latest` | Install a specific version |
 | `openio_account_workers` | `` | Number of worker (default if empty) |
+| `openio_account_provision_only` | `false` | Provision only without restarting services |
 
 ## Dependencies
 
