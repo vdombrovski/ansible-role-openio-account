@@ -49,6 +49,16 @@
   when: not item.stat.exists
   tags: install
 
+- name: Ensure log directory
+  file:
+    path: "/var/log/oio/sds/{{ openio_account_namespace }}/account-{{ openio_account_serviceid }}"
+    state: directory
+    owner: "{{ syslog_user }}"
+    group: openio
+    mode: 0750
+    recurse: true
+  tags: install
+
 - name: Generate configuration files
   template:
     src: "{{ item.src }}"

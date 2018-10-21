@@ -3,4 +3,5 @@
 ---
 account_packages:
   - "{{ 'openio-sds-server' if openio_account_version == 'latest' else 'openio-sds-server-' ~ openio_account_version}}"
+syslog_user: openio
 ...
