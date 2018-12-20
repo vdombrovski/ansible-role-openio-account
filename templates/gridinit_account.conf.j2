@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
-[Service.{{ openio_account_namespace }}-account-{{ openio_account_serviceid }}]
-command=/usr/bin/oio-account-server /etc/oio/sds/{{ openio_account_namespace }}/account-{{ openio_account_serviceid }}/account-{{ openio_account_serviceid }}.conf
+[Service.{{ openio_account_namespace }}-{{ openio_account_servicename }}]
+command=/usr/bin/oio-account-server /etc/oio/sds/{{ openio_account_namespace }}/{{ openio_account_servicename }}/{{ openio_account_servicename }}.conf
 enabled=true
 start_at_boot=true
 on_die=respawn

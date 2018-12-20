@@ -7,20 +7,6 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Create the 'openio' group
-  group:
-    name: openio
-    gid: "{{ openio_group_openio_gid | default('220')}}"
-  tags: install
-
-- name: Create the 'openio' user
-  user:
-    name: openio
-    comment: "openio account"
-    uid: "{{ openio_user_openio_uid | default('120')}}"
-    group: openio
-  tags: install
-
 - name: "Include {{ ansible_distribution }} tasks"
   include_tasks: "{{ item }}"
   with_first_found:
@@ -28,35 +14,20 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Test directories presence
-  stat:
-    path: "{{ item }}"
-  register: _dir
-  with_items:
-    - "/etc/gridinit.d/{{ openio_account_namespace }}"
-    - "{{ openio_account_sysconfig_dir }}/account-{{ openio_account_serviceid }}"
-    - "/etc/oio/sds/{{ openio_account_namespace }}/watch"
-
 - name: Ensure directories exists
   file:
-    path: "{{ item.item }}"
+    path: "{{ item.path }}"
     state: directory
-    owner: openio
-    group: openio
-    mode: 0755
-    recurse: true
-  with_items: "{{ _dir.results }}"
-  when: not item.stat.exists
-  tags: install
-
-- name: Ensure log directory
-  file:
-    path: "/var/log/oio/sds/{{ openio_account_namespace }}/account-{{ openio_account_serviceid }}"
-    state: directory
-    owner: "{{ syslog_user }}"
-    group: openio
-    mode: 0750
-    recurse: true
+    owner: "{{ item.owner | default('openio') }}"
+    group: "{{ item.group | default('openio') }}"
+    mode: "{{ item.mode | default(0755) }}"
+  with_items:
+    - path: "/etc/gridinit.d/{{ openio_account_namespace }}"
+    - path: "{{ openio_account_sysconfig_dir }}/{{ openio_account_servicename }}"
+    - path: "/etc/oio/sds/{{ openio_account_namespace }}/watch"
+    - path: "/var/log/oio/sds/{{ openio_account_namespace }}/{{ openio_account_servicename }}"
+      owner: "{{ syslog_user }}"
+      mode: "0750"
   tags: install
 
 - name: Generate configuration files
@@ -69,18 +40,18 @@
   with_items:
     - src: "account.conf.j2"
       dest: "{{ openio_account_sysconfig_dir }}/\
-        account-{{ openio_account_serviceid }}/account-{{ openio_account_serviceid }}.conf"
+        {{ openio_account_servicename }}/{{ openio_account_servicename }}.conf"
     - src: "gridinit_account.conf.j2"
       dest: "{{ openio_account_gridinit_dir }}/{{ openio_account_gridinit_file_prefix }}\
-        account-{{ openio_account_serviceid }}.conf"
+        {{ openio_account_servicename }}.conf"
     - src: "watch-account.yml.j2"
-      dest: "{{ openio_account_sysconfig_dir }}/watch/account-{{ openio_account_serviceid }}.yml"
+      dest: "{{ openio_account_sysconfig_dir }}/watch/{{ openio_account_servicename }}.yml"
   register: _account_conf
 
 - name: restart account
   shell: |
     gridinit_cmd reload
-    gridinit_cmd restart  {{openio_account_namespace}}-account-{{openio_account_serviceid}}
+    gridinit_cmd restart  {{ openio_account_namespace }}-{{ openio_account_servicename }}
   when:
     - _account_conf.changed
     - not openio_account_provision_only
