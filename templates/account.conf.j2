@@ -15,6 +15,6 @@ log_facility = {{ openio_account_log_facility }}
 log_address = {{ openio_account_log_address }}
 syslog_prefix = OIO,{{ openio_account_namespace }},account,{{ openio_account_serviceid }}
 autocreate = true
-{% if openio_account_workers %}workers = {{ openio_account_workers }}{% endif %}
+{% if openio_account_workers is defined and openio_account_workers %}workers = {{ openio_account_workers }}{% endif %}
 
-{% if openio_account_backlog %}backlog = {{ openio_account_backlog }}{% endif %}
+{% if openio_account_backlog is defined and openio_account_backlog %}backlog = {{ openio_account_backlog }}{% endif %}

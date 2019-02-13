@@ -26,4 +26,9 @@ openio_account_gridinit_dir: "/etc/gridinit.d/{{ openio_account_namespace }}"
 openio_account_gridinit_file_prefix: ""
 
 openio_account_provision_only: false
+
+openio_account_slots:
+  "{{ [ openio_account_type, openio_account_type ~ '-' ~ openio_account_location.split('.')[:-2] | join('-') ] \
+  if openio_account_location.split('.') | length > 2 \
+  else [ openio_account_type ] }}"
 ...

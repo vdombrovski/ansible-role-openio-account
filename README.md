@@ -27,6 +27,7 @@ An Ansible role for install and configure a servicetype account.
 | `openio_account_sentinel_master_name` | `"{{ openio_account_namespace }}-master-1"` | Sentinel master name (not compatible with `openio_account_redis_standalone`) |
 | `openio_account_sentinels_hosts` | `` | List of sentinels <IP:PORT> |
 | `openio_account_serviceid` | `"0"` | ID in gridinit |
+| `openio_account_slots` | `[account]` | The service's slot in conscience |
 | `openio_account_version` | `latest` | Install a specific version |
 | `openio_account_workers` | `` | Number of worker (default if empty) |
 | `openio_account_provision_only` | `false` | Provision only without restarting services |

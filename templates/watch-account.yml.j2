@@ -2,7 +2,7 @@
 ---
 host: {{ openio_account_bind_address }}
 port: {{ openio_account_bind_port }}
-type: account
+type: {{ openio_account_type }}
 {% if openio_account_location | ipaddr %}
 location: {{ openio_account_location | replace(".", "-") }}
 {% else %}
@@ -13,4 +13,6 @@ checks:
 stats:
   - {type: http, path: /status, parser: json}
   - {type: system}
+slots:
+  {{ openio_account_slots | to_nice_yaml | indent(2) }}
 ...

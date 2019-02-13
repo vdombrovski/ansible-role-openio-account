@@ -1,6 +1,7 @@
 ---
 openio_account_sysconfig_dir: "/etc/oio/sds/{{ openio_account_namespace }}"
 openio_account_servicename: "account-{{ openio_account_serviceid }}"
+openio_account_type: account
 
 openio_account_definition_file: >
   "{{ openio_account_sysconfig_dir }}/
