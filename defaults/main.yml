@@ -1,25 +1,33 @@
 # roles/account/defaults/main.yml
 ---
-openio_account_namespace: "OPENIO"
-openio_account_serviceid: "0"
+openio_account_namespace: "{{ namespace | default('OPENIO') }}"
+openio_account_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
 
 openio_account_version: 'latest'
 
 openio_account_bind_interface: "{{ ansible_default_ipv4.alias }}"
-openio_account_bind_address:
-  "{{ hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address'] }}"
+openio_account_bind_address: "{{ openio_bind_address \
+  | default(hostvars[inventory_hostname]['ansible_' + openio_account_bind_interface]['ipv4']['address']) }}"
+
 openio_account_bind_port: 6009
 #openio_account_backlog: 2048
-openio_account_sentinels_hosts: ""
+openio_account_sentinels_hosts: "{{ (groups[openio_account_redis_inventory_groupname] \
+  | map('extract', hostvars, ['openio_bind_address'])\
+  | map('regex_replace', '$', ':6012') \
+  | join(',')) if openio_account_redis_inventory_groupname in groups \
+  else \
+  openio_account_bind_address ~ ':6012' }}"
 openio_account_sentinel_master_name: "{{ openio_account_namespace }}-master-1"
 
+openio_account_redis_inventory_groupname: redis
 openio_account_redis_standalone: ""
 
 openio_account_log_level: INFO
 openio_account_log_facility: LOG_LOCAL0
 openio_account_log_address: /dev/log
 
-openio_account_location: "{{ ansible_hostname }}"
+openio_account_location: "{{ openio_location_room | default ('') }}{{ openio_location_rack | default ('') }}\
+  {{ openio_location_server | default (ansible_hostname ~ '.') }}{{ openio_account_serviceid }}"
 openio_account_workers: ""
 
 openio_account_gridinit_dir: "/etc/gridinit.d/{{ openio_account_namespace }}"
