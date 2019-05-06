@@ -4,6 +4,7 @@
   become: true
   vars:
     NS: TRAVIS
+    openio_bootstrap: true
   roles:
     - role: users
     - role: repo

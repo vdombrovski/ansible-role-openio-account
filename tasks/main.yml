@@ -48,12 +48,37 @@
       dest: "{{ openio_account_sysconfig_dir }}/watch/{{ openio_account_servicename }}.yml"
   register: _account_conf
 
-- name: restart account
+- name: "restart account to apply the new configuration"
   shell: |
     gridinit_cmd reload
     gridinit_cmd restart  {{ openio_account_namespace }}-{{ openio_account_servicename }}
+  register: _restart_account
   when:
-    - _account_conf.changed
+    - _account_conf is changed
     - not openio_account_provision_only
   tags: configure
+
+- block:
+    - name: "Ensure account is started"
+      command: gridinit_cmd start {{ openio_account_namespace }}-{{ openio_account_servicename }}
+      register: _start_account
+      changed_when: '"Success" in _start_account.stdout'
+      when:
+        - not openio_account_provision_only
+        - _restart_account is skipped
+      tags: configure
+
+    - name: check account
+      uri:
+        url: "http://{{ openio_account_bind_address }}:{{ openio_account_bind_port }}/status"
+        return_content: true
+        status_code: 200
+      register: _account_check
+      retries: 3
+      delay: 5
+      until: _account_check is success
+      changed_when: false
+      when:
+        - not openio_account_provision_only
+  when: openio_bootstrap | d(false)
 ...
