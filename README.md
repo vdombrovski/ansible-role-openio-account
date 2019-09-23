@@ -31,6 +31,7 @@ An Ansible role for install and configure a servicetype account.
 | `openio_account_version` | `latest` | Install a specific version |
 | `openio_account_workers` | `` | Number of worker (default if empty) |
 | `openio_account_provision_only` | `false` | Provision only without restarting services |
+| `openio_account_package_upgrade` | `false` | Set the packages to the latest version (to be set in extra_vars) |
 
 ## Dependencies
 
